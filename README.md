@@ -1,8 +1,30 @@
-# shlog
+shlog
+=====
 
 A wrapper around [lumberjack](https://github.com/bdurand/lumberjack) to make logging on the command line easier.
 
-## Contributing
+Usage
+-----
+
+From the command-line:
+
+```
+> shlog help
+```
+
+Or from any shell script:
+
+```sh
+shlog log "Ruby is Awesome!"
+```
+
+Configuration
+-------------
+
+TODO: Document this!
+
+Contributing
+------------
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
