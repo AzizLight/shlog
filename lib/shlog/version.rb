@@ -1,3 +1,4 @@
 module Shlog
-  VERSION = '0.0.1'
+  version_file = File.expand_path("../../VERSION", File.dirname(File.realpath(__FILE__)))
+  VERSION = File.read(version_file).freeze
 end

@@ -1,4 +1,17 @@
-require 'shlog/version.rb'
+# Require dev shit
+if ENV["DEV_MODE"] == "debug"
+  require "ap" rescue nil
+end
 
-# Add requires for other files you add to your project here, so
-# you just need to require this one file in your bin file
+# Require Standard Library shit
+require "psych"
+require "erb"
+
+# Require gems shit
+require "gli"
+require "rainbow/ext/string"
+require "lumberjack"
+
+# Require personal shit
+require_relative "./shlog/version"
+require_relative "./shlog/cli"

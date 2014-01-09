@@ -1,0 +1,8 @@
+---
+commands:
+  :log:
+    :dir: <%= File.join(ENV["HOME"], ".logs") %>
+    :filename: <%= "#{ENV["USER"]}.log" %>
+    :level: "INFO"
+    :"max-size": 5000
+
