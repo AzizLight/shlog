@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "awesome_print"
 
-  spec.add_runtime_dependency "gli", "2.8.1"
+  spec.add_runtime_dependency "gli_aziz_light"
   spec.add_runtime_dependency "rainbow"
   spec.add_runtime_dependency "lumberjack"
 end

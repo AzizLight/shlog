@@ -4,8 +4,8 @@ module Shlog
 
     program_desc  "Command-line logging made easy"
     version       Shlog::VERSION
-    desc          "A wrapper around lumberjack (https://github.com/bdurand/lumberjack) to make logging on the command line easier."
 
+    desc "Path to the config file to use"
     arg_name "FILE"
     flag [:config]
 
@@ -14,6 +14,7 @@ module Shlog
 
     pre do |global, command, options, args|
       config_files = CONFIG_FILES
+      default_config_file = config_files.shift
 
       if global[:config]
         # If a config file is explicitely specified, it MUST exist!
@@ -29,18 +30,15 @@ module Shlog
           next unless File.exists?(cf) && File.readable?(cf)
 
           config = Psych.load(ERB.new(IO.read(cf)).result)
-
-          options.merge! config["commands"][command.name.to_sym]
-
-          # Only merge the global options
-          config.delete_if { |k, c| c.is_a?(Enumerable) }
-          global.merge! config
+          options.merge!(config_to_options_for(command, config["commands"][command.name.to_sym]))
 
           # TODO: Add a flag to skip other config files, maybe?
         rescue => e
           raise RuntimeError, "Unable to load config from '#{cf}': #{e.message}"
         end
       end
+
+      options.merge!(options[:cli])
 
       true
     end
