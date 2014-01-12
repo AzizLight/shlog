@@ -1,47 +1,6 @@
 module Shlog
   class CLI
-    extend GLI::App
-
-    CONFIG_FILE_NAME = "shlogrc"
-
-    CONFIG_FILES = [
-      File.expand_path(File.join(File.dirname(File.realpath(__FILE__)), "..", "..", CONFIG_FILE_NAME)),
-      File.join(ENV["HOME"], ".#{CONFIG_FILE_NAME}"),
-      File.join(Dir.getwd, ".#{CONFIG_FILE_NAME}")
-    ]
-
-    class << self
-      def global
-        @global ||= Hash.new
-      end
-
-      def global=(value)
-        @global = value
-      end
-
-      def options
-        @options ||= Hash.new
-      end
-
-      def options=(value)
-        @options = value
-      end
-    end
-
-    def self.set_default_options!
-      config_file = CONFIG_FILES.first
-
-      if File.exists?(config_file) && File.readable?(config_file)
-        config = Psych.load(ERB.new(IO.read(config_file)).result)
-      else
-        config = {}
-      end
-
-      self.options = config["commands"]
-
-      config.delete_if { |k, c| c.is_a?(Enumerable) }
-      self.global = config
-    end
+    include Shlog::BasicCLI
 
     program_desc  "Command-line logging made easy"
     version       Shlog::VERSION

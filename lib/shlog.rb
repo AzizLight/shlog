@@ -14,4 +14,5 @@ require "lumberjack"
 
 # Require personal shit
 require_relative "./shlog/version"
+require_relative "./shlog/basic_cli"
 require_relative "./shlog/cli"
