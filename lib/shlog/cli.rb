@@ -14,7 +14,6 @@ module Shlog
 
     pre do |global, command, options, args|
       config_files = CONFIG_FILES
-      default_config_file = config_files.shift
 
       if global[:config]
         # If a config file is explicitely specified, it MUST exist!
