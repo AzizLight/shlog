@@ -1,5 +1,5 @@
 # Require dev shit
-if ENV["DEV_MODE"] == "debug"
+if ENV["SHLOG_DEV_MODE"] == "debug"
   require "ap" rescue nil
 end
 
