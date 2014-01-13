@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "gli_aziz_light"
   spec.add_runtime_dependency "rainbow"
-  spec.add_runtime_dependency "lumberjack"
+  spec.add_runtime_dependency "lumberjack_aziz_light", "1.0.6"
 end

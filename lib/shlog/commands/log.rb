@@ -48,6 +48,9 @@ module Shlog
       c.desc "Vebose mode"
       c.switch :v, :verbose, default: false
 
+      c.desc "Archive current log file"
+      c.switch :archive, default: false, negatable: false
+
       c.desc "Get the path to the log file"
       c.switch :g, :"get-logfile", default: false, negatable: false
 
@@ -58,6 +61,13 @@ module Shlog
           # NOTE: All the options are ignored when the '--get-logfile' options is passed
 
           puts file
+        elsif options[:archive]
+          if File.open(file, "r").lstat.size == 0
+            raise RuntimeError, "The log file is empty and cannot be archived"
+          end
+
+          logger = Lumberjack::Device::SizeRollingLogFile.new(file, manual: true)
+          logger.roll_file!
         else
           if args.empty?
             raise ArgumentError, "Cannot add a log entry without a message"
